@@ -6,9 +6,9 @@ import openpyxl
 
 
 def process(inp_key):
-    xls = pd.ExcelFile("data.xlsx")
+    xls = pd.ExcelFile("main.xlsx")
     data = pd.read_excel(xls,"data")
-    data = data[["ID","COMMITTEE","NAME","FOOD","STATUS"]]
+    data = data[["ID","NAME","MAIL","COMMITTEE","FOOD","ACCO","STATUS"]]
     data.index = data["ID"]
     flag = 0
     for i in list(data["ID"]):
@@ -21,7 +21,7 @@ def process(inp_key):
             st.header(f"FOOD : {rdata["FOOD"][inp_key]} ")
             if not(rdata["STATUS"][inp_key]=="done"):
                 data.at[inp_key,"STATUS"] = "done"
-                data.to_excel(xls,sheet_name="data")
+                data.to_excel(xls,index=False,sheet_name="data")
                 st.success("SUCCESS")
             else:
                 st.warning("FOOD TAKEN")
@@ -34,10 +34,10 @@ def process(inp_key):
 
 def main():
     st.title("SSN SNUC LUNCHAPP")
-    xls = pd.ExcelFile("data.xlsx")
-    data = pd.read_excel(xls,"data")
-    data.index = data["ID"]
-    data = data[["NAME","FOOD","STATUS"]]
+    # xls = pd.ExcelFile("data.xlsx")
+    # data = pd.read_excel(xls,"data")
+    # data.index = data["ID"]
+    # data = data[["NAME","FOOD","STATUS"]]
     inp_key = st.text_input("Enter Delegate key :")
     if st.button("ENTER",type="primary"):
         process(inp_key)
