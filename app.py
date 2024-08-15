@@ -8,7 +8,7 @@ import openpyxl
 def process(inp_key):
     xls = pd.ExcelFile("main.xlsx")
     data = pd.read_excel(xls,"data")
-    data = data[["ID","NAME","MAIL","COMMITTEE","FOOD","ACCO","STATUS"]]
+    data = data[["ID","NAME","MAIL","PH NO","COMMITTEE","FOOD","ACCO","STATUS"]]
     data.index = data["ID"]
     flag = 0
     for i in list(data["ID"]):
